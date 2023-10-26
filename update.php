@@ -1,7 +1,7 @@
 <?php
 include('./key_connect.php');
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
-    $id = $_GET['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ID'])) {
+    $id = $_GET['ID'];
     // Connect to the database (replace with your database credentials)
     $conn = new mysqli($host, $username, $password, $database);
     if ($conn->connect_error) {
@@ -9,12 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['id'])) {
     }
     echo "Connected successfully!";
     // Retrieve the item from the database
-    $sql = "SELECT * FROM items WHERE id=$id";
+    $sql = "SELECT * FROM item WHERE id=$id";
     $result = $conn->query($sql);
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $item = $row['name'];
+        $item = $row['Name'];
     }
 
     // Close the database connection

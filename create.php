@@ -1,21 +1,24 @@
 <?php
-include('./key_connect.php');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $item = $_POST['item'];
-    if (!empty($item)) {
-        // Connect to the database (replace with your database credentials)
-        $conn = new mysqli($host, $username, $password, $database);
-        if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-        }
-        echo "Connected successfully!";
-        // Insert the item into the database
-        $sql = "INSERT INTO items (name) VALUES ('$item')";
-        $conn->query($sql);
+$name = $_POST['name'];
+$id_student = $_POST['id_student'];
+$class = $_POST['class'];
+if (!empty($name) && !empty($id_student)&& !empty($class)) {
+require_once './connect.php';
 
-        // Close the database connection
-        $conn->close();
-    }
+$addsql = "INSERT INTO item (Name, ID_Student,Class) VALUES ('$name','$id_student','$class') ";
+
+if ($conn->query($addsql) === TRUE) {
+    echo "<br>New record created successfully<Br>";
+  } else {
+    echo "Error: " . $addsql . "<br>" . $conn->error;
+  }
+  
+// Close the database connection
+$conn->close();
+
+echo "<Br>Them thanh cong<Br>";
+
 }
-header("Location: index.php");
+}
 ?>

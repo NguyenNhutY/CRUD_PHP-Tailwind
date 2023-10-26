@@ -11,7 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         echo "Connected successfully!";
         // Update the item in the database
-        $sql = "UPDATE items SET name='$item' WHERE id=$id";
+        if (!isset($id)) {
+            // Display an error message.
+            echo 'Error: The ID of the row to be updated is not defined.';
+            exit;
+          }
+        $sql = "UPDATE item SET Name='$item' WHERE ID=$id";
         $conn->query($sql);
 
         // Close the database connection

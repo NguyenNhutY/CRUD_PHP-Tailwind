@@ -1,7 +1,7 @@
 <?php
 
 $host = "localhost";
-$database = "crud_example";
+$database = "qlsv";
 $username = "nguyeny";
 $password = "jkt74153967591";
 ?>
