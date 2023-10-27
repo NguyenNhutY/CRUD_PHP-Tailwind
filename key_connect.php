@@ -1,5 +1,4 @@
 <?php
-
 $host = "localhost";
 $database = "qlsv";
 $username = "nguyeny";
