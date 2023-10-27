@@ -11,19 +11,15 @@
 </head>
 <body class ="flex justify-content-center">
 <?php
-    require_once './connect.php';
-    $id_student = $_GET['id'];
-    if (!empty($name) && !empty($id_student) && !empty($class)) {
-        if (!isset($id)) {
-            echo 'Error: The ID of the row to be updated is not defined.';
-            exit;
-          }
-        $sql = @"UPDATE item WHERE ID_Student=$id_student";
-          $result = mysqli_query($conn, $sql);
-          $row = mysqli_fetch_assoc($result);
-          echo"Update completed";
-        $conn->close();
-    }
+//lay id cua edit
+$id = $_GET['id'];
+//ket noi
+require_once 'connect.php';
+
+$edit_sql = "SELECT * FROM item WHERE ID = '$id'";
+
+$result = mysqli_query($conn, $edit_sql);
+$row = mysqli_fetch_assoc($result);
 ?>
 <form action="./update.php" method="post" class="rounded-md 
                                                   py-8 
@@ -33,6 +29,7 @@
                                                   align-items-center 
                                                   rounded-md 
                                                   ">
+    <input type="hidden" name="id" value="<?php echo $id;?>" id="id">
   <div class="space-y-12">
     <div class="border-b 
                 border-gray-900/10 
@@ -60,7 +57,7 @@
             <input type="text" 
                     name="name" 
                     id="name" 
-                    value ="<?php echo $row['name']?>" 
+                    value ="<?php echo $row['Name']?>" 
                     class="block 
                             w-full 
                             rounded-md 
@@ -90,7 +87,7 @@
             <input id="id_student" 
                     name="id_student" 
                     type="text" 
-                    value ="<?php echo $id;?>" 
+                    value ="<?php echo $row['ID_Student']?>" 
                     class="block 
                             w-full 
                             rounded-md 
@@ -119,7 +116,7 @@
             <input id="class" 
                     name="class" 
                     type="text" 
-                    value ="<?php echo $row['class']?>"
+                    value ="<?php echo $row['Class']?>"
                     class="block 
                           w-full 
                           rounded-md 
@@ -137,7 +134,7 @@
   </div>
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
-    <button type="submit" class="rounded-md 
+    <button class="rounded-md 
                                   bg-indigo-600 
                                   px-3 
                                   py-2 

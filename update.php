@@ -1,37 +1,16 @@
 <?php
-include('./key_connect.php');
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ID'])) {
-    $id = $_GET['ID'];
-    // Connect to the database (replace with your database credentials)
-    $conn = new mysqli($host, $username, $password, $database);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    echo "Connected successfully!";
-    // Retrieve the item from the database
-    $sql = "SELECT * FROM item WHERE id=$id";
-    $result = $conn->query($sql);
 
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $item = $row['Name'];
-    }
+$name = $_POST['name'];
+$id_student = $_POST['id_student'];
+$class = $_POST['class'];
+$id = $_POST['id'];
 
-    // Close the database connection
-    $conn->close();
+require_once 'connect.php';
+
+$updatesql = "UPDATE item SET ID_Student='$id_student', Name= '$name', Class='$class' WHERE ID = $id";
+
+if (mysqli_query($conn, $updatesql)){
+
+header("Location: read.php");
 }
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Item</title>
-</head>
-<body>
-    <h1>Edit Item</h1>
-    <form method="post" action="edit.php">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="text" name="item" value="<?php echo $item; ?>">
-        <button type="submit">Update</button>
-    </form>
-</body>
-</html>

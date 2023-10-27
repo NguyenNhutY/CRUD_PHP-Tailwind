@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +8,11 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="./dist/body.css">
 </head>
-
 <body class="lg flex justify-content-center">
   <?php
   // Connect to the database (replace with your database credentials)
   require_once './connect.php';
-  $sql = @"SELECT * FROM item";
+  $sql = @"SELECT * FROM item order by ID_Student , Name";
   $result = mysqli_query($conn, $sql);
   // Display items in a table
   ?>
@@ -26,7 +24,7 @@
               align-items-center 
               rounded-md">
     <h1 class="mb-8 text-white text-2xl text-center">LIST STUDENT</h1>
-    <button id="open-modal" class="bg-blue-600 
+    <button id="open-modal" class="bg-green-600 
             hover:bg-green-500 
             text-white 
             font-bold 
@@ -35,6 +33,7 @@
             rounded">
       Add
     </button>
+    <br><br>
     <div id="myModal" class="modal 
               hidden 
               fixed 
@@ -68,12 +67,13 @@
           </div>
           <div class="modal-body">
             <!-- Your PHP content goes here -->
-            <form action="/create.php" method="post" class="rounded-md 
-                  py-8 
-                  max-width-500px 
+            <form action="./create.php" method="post" class="
+                  rounded-md 
+                  py-8
+                  max-width-500px
                   width-500px
                   mx-auto  
-                  align-items-center 
+                  align-items-center
                   rounded-md 
                   ">
               <div class="space-y-12">
@@ -90,7 +90,7 @@
                         Name
                       </label>
                       <div class="mt-2">
-                        <input type="text" name="name" id="name" value="<?php echo $row['name'] ?>" class="block 
+                        <input type="text" name="name" id="name" class="block 
                                   w-full 
                                   rounded-md 
                                   border-0 
@@ -117,7 +117,7 @@
                         ID Student
                       </label>
                       <div class="mt-2">
-                        <input id="id_student" name="id_student" type="text" value="<?php echo $id; ?>" class="block 
+                        <input id="id_student" name="id_student" type="text" class="block 
                                 w-full 
                                 rounded-md 
                                 border-0 
@@ -143,7 +143,7 @@
                         Class
                       </label>
                       <div class="mt-2">
-                        <input id="class" name="class" type="text" value="<?php echo $row['class'] ?>" class="block 
+                        <input id="class" name="class" type="text" class="block 
                                 w-full 
                                 rounded-md 
                                 border-0 
@@ -160,15 +160,13 @@
                                 sm:text-sm 
                                 sm:leading-6">
                       </div>
-                    </div>
+                    </div><!---->
                   </div>
                 </div>
               </div>
-          </div>
-        </div>
-        <div class="modal-footer mt-4 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-          <!-- Modal actions, buttons, etc. go here -->
-          <button type="button" class="inline-flex 
+              <div class="modal-footer mt-4 bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <!-- Modal actions, buttons, etc. go here -->
+                <button type="submit" class="inline-flex 
                     w-full 
                     justify-center 
                     rounded-md 
@@ -180,8 +178,8 @@
                     text-white 
                     shadow-sm 
                     hover:bg-green-500 
-                    sm:ml-3 sm:w-auto" onclick="location.href('/create.php')">Add</button>
-          <button id="close-modal" type="button" class="mt-3 
+                    sm:ml-3 sm:w-auto" onclick="closeModal()">Add</button>
+                <button id="close-modal" type="button" class="mt-3 
                   inline-flex 
                   w-full 
                   justify-center 
@@ -197,8 +195,13 @@
                   ring-inset 
                   ring-gray-300 
                   hover:bg-gray-50 
-                  sm:mt-0 sm:w-auto" onclick="closeModal()">Cancel</button>
+                  sm:mt-0 sm:w-auto" onclick="closeModal()">Cancel
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
+
       </div>
     </div>
     <script>
@@ -236,20 +239,20 @@
             <td class="p-4 w-1/4 text-center"><?php echo $r['Class'] ?></td>
             <td>
               <div class="mt-6 flex items-center justify-end gap-x-6 ">
-                <a href="./edit.php?id=<?php echo $r['ID_Student']; ?>" class="rounded-md 
+                <a href="./edit.php?id=<?php echo $r['ID']; ?>" class="rounded-md 
                                                                                bg-green-500 
                                                                                px-3 
                                                                                py-2 
                                                                                text-sm 
                                                                                font-semibold 
                                                                                text-white 
-                                                                               shadow-sm hover:bg-indigo-400 
+                                                                               shadow-sm hover:bg-green-400 
                                                                                focus-visible:outline 
                                                                                focus-visible:outline-2 
                                                                                focus-visible:outline-offset-2 
                                                                                focus-visible:outline-indigo-600"> Edit
                 </a>
-                <a href="./delete.php?id=<?php echo $r['ID_Student']; ?>" class="rounded-md 
+                <a onclick="return confirm('Are you want to delete this student? ');" href="delete.php?id=<?php echo $r['ID'];?>" class="rounded-md 
                                                                                   bg-orange-700 
                                                                                   px-3 py-2 
                                                                                   text-sm 
@@ -267,9 +270,6 @@
           </tr>
         <?php
         }
-        ?>
-        <?php
-        $conn->close();
         ?>
       </tbody>
     </table>
