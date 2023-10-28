@@ -1,37 +1,15 @@
 <?php
-include('./key_connect.php');
-if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['ID'])) {
-    $id = $_GET['ID'];
-    // Connect to the database (replace with your database credentials)
-    $conn = new mysqli($host, $username, $password, $database);
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-    echo "Connected successfully!";
-    // Retrieve the item from the database
-    $sql = "SELECT * FROM item WHERE id=$id";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $item = $row['Name'];
-    }
-
-    // Close the database connection
-    $conn->close();
+require_once 'connect.php';
+$name = mysqli_real_escape_string($conn, $_POST['name']);
+$id_student = mysqli_real_escape_string($conn, $_POST['id_student']);
+$class = mysqli_real_escape_string($conn, $_POST['class']);
+$id = intval($_POST['id']);
+$update_sql = @"UPDATE item SET ID_Student=?, Name= ?, Class=? WHERE ID = ?";
+$stmt = mysqli_prepare($conn, $update_sql);
+mysqli_stmt_bind_param($stmt, "sssi", $id_student, $name, $class, $id);
+if (mysqli_stmt_execute($stmt)) {
+    header("Location: read.php");
+} else {
 }
+mysqli_stmt_close($stmt);
 ?>
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Item</title>
-</head>
-<body>
-    <h1>Edit Item</h1>
-    <form method="post" action="edit.php">
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="text" name="item" value="<?php echo $item; ?>">
-        <button type="submit">Update</button>
-    </form>
-</body>
-</html>
