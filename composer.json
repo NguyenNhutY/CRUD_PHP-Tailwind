@@ -1,0 +1,6 @@
+{
+    "require": {
+        "dotenv-org/phpdotenv-vault": "^0.1.2",
+        "vlucas/phpdotenv": "^5.5"
+    }
+}
