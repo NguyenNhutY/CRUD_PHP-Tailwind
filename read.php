@@ -23,7 +23,11 @@
               mx-auto  
               align-items-center 
               rounded-md">
+<<<<<<< HEAD
     <h1 class="mb-8 text-white text-2xl font-semibold text-center">LIST STUDENT</h1>
+=======
+    <h1 class="mb-8 text-white text-2xl text-center">LIST STUDENT</h1>
+>>>>>>> 59cdcb72b56f86e044f0e226ffb07d5e47228e61
     <button id="open-modal" class="bg-green-600 
             hover:bg-green-500 
             text-white 
@@ -178,7 +182,11 @@
                     text-white 
                     shadow-sm 
                     hover:bg-green-500 
+<<<<<<< HEAD
                     sm:ml-3 sm:w-auto" >Add</button>
+=======
+                    sm:ml-3 sm:w-auto" onclick="closeModal()">Add</button>
+>>>>>>> 59cdcb72b56f86e044f0e226ffb07d5e47228e61
                 <button id="close-modal" type="button" class="mt-3 
                   inline-flex 
                   w-full 
@@ -195,7 +203,11 @@
                   ring-inset 
                   ring-gray-300 
                   hover:bg-gray-50 
+<<<<<<< HEAD
                   sm:mt-0 sm:w-auto" >Cancel
+=======
+                  sm:mt-0 sm:w-auto" onclick="closeModal()">Cancel
+>>>>>>> 59cdcb72b56f86e044f0e226ffb07d5e47228e61
                 </button>
               </div>
             </form>
@@ -263,6 +275,7 @@
             <td class="p-4 w-1/4 text-center"><?php echo $r['Class'] ?></td>
             <td>
               <div class="mt-6 flex items-center justify-end gap-x-6 ">
+<<<<<<< HEAD
                 <a href="./edit.php?id=<?php echo $r['ID']; ?>" 
                     class="rounded-md 
                             bg-green-500 
@@ -292,6 +305,34 @@
                           inline-block
                           cursor-pointer"
                   id ="open-modal-delete">Delete</a>
+=======
+                <a href="./edit.php?id=<?php echo $r['ID']; ?>" class="rounded-md 
+                                                                               bg-green-500 
+                                                                               px-3 
+                                                                               py-2 
+                                                                               text-sm 
+                                                                               font-semibold 
+                                                                               text-white 
+                                                                               shadow-sm hover:bg-green-400 
+                                                                               focus-visible:outline 
+                                                                               focus-visible:outline-2 
+                                                                               focus-visible:outline-offset-2 
+                                                                               focus-visible:outline-indigo-600"> Edit
+                </a>
+                <a onclick="return confirm('Are you want to delete this student? ');" href="delete.php?id=<?php echo $r['ID'];?>" class="rounded-md 
+                                                                                  bg-orange-700 
+                                                                                  px-3 py-2 
+                                                                                  text-sm 
+                                                                                  font-semibold 
+                                                                                  text-white 
+                                                                                  shadow-sm 
+                                                                                  hover:bg-orange-600 
+                                                                                  focus-visible:outline 
+                                                                                  focus-visible:outline-2 
+                                                                                  focus-visible:outline-offset-2 
+                                                                                  focus-visible:outline-indigo-600 
+                                                                                  inline-block">Delete</a>
+>>>>>>> 59cdcb72b56f86e044f0e226ffb07d5e47228e61
               </div>
             </td>
           </tr>

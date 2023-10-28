@@ -134,6 +134,7 @@ $row = mysqli_fetch_assoc($result);
   </div>
 
   <div class="mt-6 flex items-center justify-end gap-x-6">
+<<<<<<< HEAD
   <button id="open-modal" class="bg-gray-600 
             hover:bg-gray-500 
             text-white 
@@ -144,6 +145,8 @@ $row = mysqli_fetch_assoc($result);
     onclick ="location.href=('javascript:history.back()')">
       Back
     </button>
+=======
+>>>>>>> 59cdcb72b56f86e044f0e226ffb07d5e47228e61
     <button class="rounded-md 
                                   bg-indigo-600 
                                   px-3 
